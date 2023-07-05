@@ -1,12 +1,19 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Vendedor {
     private String nombre;
-    private String apellido;
-    private double comision;
+    private String dni;
+    private String domicilio;
+    private String telefono;
+    private List<Coche> cochesVendidos;
 
-    public Vendedor(String nombre, String apellido, double comision) {
+    public Vendedor(String nombre, String dni, String domicilio, String telefono) {
         this.nombre = nombre;
-        this.apellido = apellido;
-        this.comision = comision;
+        this.dni = dni;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+        this.cochesVendidos = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -17,19 +24,52 @@ public class Vendedor {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getDni() {
+        return dni;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
-    public double getComision() {
-        return comision;
+    public String getDomicilio() {
+        return domicilio;
     }
 
-    public void setComision(double comision) {
-        this.comision = comision;
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public List<Coche> getCochesVendidos() {
+        return cochesVendidos;
+    }
+
+    public void setCochesVendidos(List<Coche> cochesVendidos) {
+        this.cochesVendidos = cochesVendidos;
+    }
+
+    public void agregarCocheVendido(Coche coche) {
+        cochesVendidos.add(coche);
+    }
+
+    // Otros métodos relevantes para la gestión de vendedores
+
+    @Override
+    public String toString() {
+        return "Vendedor{" +
+                "nombre='" + nombre + '\'' +
+                ", dni='" + dni + '\'' +
+                ", domicilio='" + domicilio + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", cochesVendidos=" + cochesVendidos +
+                '}';
     }
 }

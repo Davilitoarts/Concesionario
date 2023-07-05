@@ -1,26 +1,24 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Coche {
     private String marca;
     private String modelo;
-    private String color;
     private String matricula;
     private double precioCompra;
     private double precioVenta;
-    private LocalDate fechaCompra;
     private EstadoCoche estado;
-    private ArrayList<Reparacion> reparaciones;
+    private TipoCoche tipo;
+    private List<Reparacion> reparaciones;
 
-    public Coche(String marca, String modelo, String color, String matricula, double precioCompra, double precioVenta, LocalDate fechaCompra) {
+    public Coche(String marca, String modelo, String matricula, double precioCompra, double precioVenta, EstadoCoche estado, TipoCoche tipo) {
         this.marca = marca;
         this.modelo = modelo;
-        this.color = color;
         this.matricula = matricula;
         this.precioCompra = precioCompra;
         this.precioVenta = precioVenta;
-        this.fechaCompra = fechaCompra;
-        this.estado = EstadoCoche.EN_VENTA;
+        this.estado = estado;
+        this.tipo = tipo;
         this.reparaciones = new ArrayList<>();
     }
 
@@ -38,14 +36,6 @@ public class Coche {
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public String getMatricula() {
@@ -72,14 +62,6 @@ public class Coche {
         this.precioVenta = precioVenta;
     }
 
-    public LocalDate getFechaCompra() {
-        return fechaCompra;
-    }
-
-    public void setFechaCompra(LocalDate fechaCompra) {
-        this.fechaCompra = fechaCompra;
-    }
-
     public EstadoCoche getEstado() {
         return estado;
     }
@@ -88,39 +70,62 @@ public class Coche {
         this.estado = estado;
     }
 
-    public void cambiarEstado(EstadoCoche nuevoEstado) {
-        this.estado = nuevoEstado;
+    public TipoCoche getTipo() {
+        return tipo;
     }
 
-    public void agregarReparacion(Reparacion reparacion) {
+    public void setTipo(TipoCoche tipo) {
+        this.tipo = tipo;
+    }
+
+    public List<Reparacion> getReparaciones() {
+        return reparaciones;
+    }
+
+    public void addReparacion(Reparacion reparacion) {
         reparaciones.add(reparacion);
     }
 
-    public ArrayList<Reparacion> obtenerReparaciones() {
-        return reparaciones;
+    public void removeReparacion(Reparacion reparacion) {
+        reparaciones.remove(reparacion);
     }
 
-    public Coche(String marca, String modelo, String color, String matricula, double precioCompra, double precioVenta, LocalDate fechaCompra, EstadoCoche estado, ArrayList<Reparacion> reparaciones) {
-        this.marca = marca;
-        this.modelo = modelo;
-        this.color = color;
-        this.matricula = matricula;
-        this.precioCompra = precioCompra;
-        this.precioVenta = precioVenta;
-        this.fechaCompra = fechaCompra;
-        this.estado = estado;
-        this.reparaciones = reparaciones;
+    public void mostrarReparaciones() {
+        if (reparaciones.isEmpty()) {
+            System.out.println("No hay reparaciones para este coche.");
+        } else {
+            System.out.println("Reparaciones realizadas en el coche " + matricula + ":");
+            for (Reparacion reparacion : reparaciones) {
+                System.out.println("- " + reparacion.getTipo() + ", Fecha: " + reparacion.getFecha());
+            }
+        }
     }
 
-    public int getIdentificacion() {
-        return 0;
+    // Otros métodos relevantes para la gestión de coches
+
+    @Override
+    public String toString() {
+        return "Coche{" +
+                "marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", matricula='" + matricula + '\'' +
+                ", precioCompra=" + precioCompra +
+                ", precioVenta=" + precioVenta +
+                ", estado=" + estado +
+                ", tipo=" + tipo +
+                '}';
     }
 
-    public void setReparaciones(ArrayList<Reparacion> reparaciones) {
-        this.reparaciones = reparaciones;
+    public static enum EstadoCoche {
+        REPARADO,
+        EN_VENTA,
+        RESERVADO,
+        VENDIDO
     }
 
-    public ArrayList<Reparacion> getReparaciones() {
-        return reparaciones;
+    public static enum TipoCoche {
+        TURISMO,
+        INDUSTRIAL,
+        TODOTERRENO
     }
 }

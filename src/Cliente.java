@@ -1,18 +1,21 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Cliente {
     private String nombre;
-    private String direccion;
     private String dni;
-    private ArrayList<Coche> cochesReservados;
-    private ArrayList<Coche> cochesComprados;
+    private String domicilio;
+    private String telefono;
+    private List<Coche> cochesComprados;
+    private List<Coche> cochesReservados;
 
-    public Cliente(String nombre, String direccion, String dni) {
+    public Cliente(String nombre, String dni, String domicilio, String telefono) {
         this.nombre = nombre;
-        this.direccion = direccion;
         this.dni = dni;
-        this.cochesReservados = new ArrayList<>();
+        this.domicilio = domicilio;
+        this.telefono = telefono;
         this.cochesComprados = new ArrayList<>();
+        this.cochesReservados = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -23,14 +26,6 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
     public String getDni() {
         return dni;
     }
@@ -39,30 +34,57 @@ public class Cliente {
         this.dni = dni;
     }
 
-    public ArrayList<Coche> getCochesReservados() {
-        return cochesReservados;
+    public String getDomicilio() {
+        return domicilio;
     }
 
-    public ArrayList<Coche> getCochesComprados() {
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public List<Coche> getCochesComprados() {
         return cochesComprados;
     }
 
-    public void reservarCoche(Coche coche) {
+    public void setCochesComprados(List<Coche> cochesComprados) {
+        this.cochesComprados = cochesComprados;
+    }
+
+    public List<Coche> getCochesReservados() {
+        return cochesReservados;
+    }
+
+    public void setCochesReservados(List<Coche> cochesReservados) {
+        this.cochesReservados = cochesReservados;
+    }
+
+    public void agregarCocheComprado(Coche coche) {
+        cochesComprados.add(coche);
+    }
+
+    public void agregarCocheReservado(Coche coche) {
         cochesReservados.add(coche);
     }
 
-    public void cancelarReserva(Coche coche) {
-        cochesReservados.remove(coche);
-    }
+    // Otros métodos relevantes para la gestión de clientes
 
-    public void imprimirCochesComprados() {
-        System.out.println("Coches comprados por " + nombre + ":");
-        for (Coche coche : cochesComprados) {
-            System.out.println(coche.getMarca() + " " + coche.getModelo());
-        }
-    }
-
-    public void comprarCoche(Coche coche) {
-        cochesComprados.add(coche);
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nombre='" + nombre + '\'' +
+                ", dni='" + dni + '\'' +
+                ", domicilio='" + domicilio + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", cochesComprados=" + cochesComprados +
+                ", cochesReservados=" + cochesReservados +
+                '}';
     }
 }

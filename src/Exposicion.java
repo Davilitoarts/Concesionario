@@ -1,22 +1,20 @@
-import java.util.ArrayList;
-
 public class Exposicion {
-    private String nombre;
+    private int numeroExposicion;
     private String direccion;
-    private ArrayList<Coche> cochesExposicion;
+    private String telefono;
 
-    public Exposicion(String nombre, String direccion) {
-        this.nombre = nombre;
+    public Exposicion(int numeroExposicion, String direccion, String telefono) {
+        this.numeroExposicion = numeroExposicion;
         this.direccion = direccion;
-        this.cochesExposicion = new ArrayList<>();
+        this.telefono = telefono;
     }
 
-    public String getNombre() {
-        return nombre;
+    public int getNumeroExposicion() {
+        return numeroExposicion;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNumeroExposicion(int numeroExposicion) {
+        this.numeroExposicion = numeroExposicion;
     }
 
     public String getDireccion() {
@@ -27,15 +25,11 @@ public class Exposicion {
         this.direccion = direccion;
     }
 
-    public ArrayList<Coche> getCochesExposicion() {
-        return cochesExposicion;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void agregarCocheExposicion(Coche coche) {
-        cochesExposicion.add(coche);
-    }
-
-    public void eliminarCocheExposicion(Coche coche) {
-        cochesExposicion.remove(coche);
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 }

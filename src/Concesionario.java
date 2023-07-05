@@ -43,4 +43,25 @@ public class Concesionario {
             }
         }
     }
+
+    public void venderCoche(String matricula, Cliente cliente) {
+        Coche coche = buscarCochePorMatricula(matricula);
+        if (coche != null) {
+            coche.setEstado(Coche.EstadoCoche.VENDIDO);
+            cliente.addCocheComprado(coche);
+            cochesDisponibles.remove(coche);
+            System.out.println("El coche con matrícula " + matricula + " ha sido vendido al cliente " + cliente.getNombre());
+        } else {
+            System.out.println("No se encontró ningún coche con la matrícula " + matricula);
+        }
+    }
+
+    private Coche buscarCochePorMatricula(String matricula) {
+        for (Coche coche : cochesDisponibles) {
+            if (coche.getMatricula().equals(matricula)) {
+                return coche;
+            }
+        }
+        return null;
+    }
 }

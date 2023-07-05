@@ -1,22 +1,30 @@
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Reparacion {
-    private Coche coche;
-    private LocalDate fecha;
+    private TipoReparacion tipo;
+    private Date fecha;
     private String descripcion;
 
-    public Reparacion(Coche coche, LocalDate fecha, String descripcion) {
-        this.coche = coche;
+    public Reparacion(TipoReparacion tipo, Date fecha, String descripcion) {
+        this.tipo = tipo;
         this.fecha = fecha;
         this.descripcion = descripcion;
     }
 
-    public Coche getCoche() {
-        return coche;
+    public TipoReparacion getTipo() {
+        return tipo;
     }
 
-    public LocalDate getFecha() {
+    public void setTipo(TipoReparacion tipo) {
+        this.tipo = tipo;
+    }
+
+    public Date getFecha() {
         return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public String getDescripcion() {
@@ -26,4 +34,23 @@ public class Reparacion {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    // Otros métodos relevantes para la gestión de reparaciones
+
+    @Override
+    public String toString() {
+        return "Reparacion{" +
+                "tipo=" + tipo +
+                ", fecha=" + fecha +
+                ", descripcion='" + descripcion + '\'' +
+                '}';
+    }
+}
+
+// Enumeración para representar los tipos de reparación
+enum TipoReparacion {
+    MECANICA,
+    ELECTRICA,
+    CHAPA,
+    REVISION
 }
