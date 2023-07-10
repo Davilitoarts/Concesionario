@@ -1,25 +1,34 @@
 import java.util.ArrayList;
-import java.util.List;
 
-public class Coche {
+public abstract class Coche {
+    private String tipo;
     private String marca;
     private String modelo;
+    private String color; //he añadido este atributo
+    private String estado;
     private String matricula;
-    private double precioCompra;
-    private double precioVenta;
-    private EstadoCoche estado;
-    private TipoCoche tipo;
-    private List<Reparacion> reparaciones;
+    private float precioVenta;
+    private float precioCompra;
+    private Exposicion exposicion;
+    private ArrayList<Reparacion> reparaciones;
 
-    public Coche(String marca, String modelo, String matricula, double precioCompra, double precioVenta, EstadoCoche estado, TipoCoche tipo) {
+    public Coche(String tipo,String marca, String modelo, String color, String estado, String matricula, float precioVenta, float precioCompra) {
+        this.tipo= tipo;
         this.marca = marca;
         this.modelo = modelo;
-        this.matricula = matricula;
-        this.precioCompra = precioCompra;
-        this.precioVenta = precioVenta;
+        this.color = color;
         this.estado = estado;
+        this.matricula = matricula;
+        this.precioVenta = precioVenta;
+        this.precioCompra = precioCompra;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
         this.tipo = tipo;
-        this.reparaciones = new ArrayList<>();
     }
 
     public String getMarca() {
@@ -38,6 +47,22 @@ public class Coche {
         this.modelo = modelo;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public String getMatricula() {
         return matricula;
     }
@@ -46,86 +71,39 @@ public class Coche {
         this.matricula = matricula;
     }
 
-    public double getPrecioCompra() {
-        return precioCompra;
-    }
-
-    public void setPrecioCompra(double precioCompra) {
-        this.precioCompra = precioCompra;
-    }
-
-    public double getPrecioVenta() {
+    public float getPrecioVenta() {
         return precioVenta;
     }
 
-    public void setPrecioVenta(double precioVenta) {
+    public void setPrecioVenta(float precioVenta) {
         this.precioVenta = precioVenta;
     }
 
-    public EstadoCoche getEstado() {
-        return estado;
+    public float getPrecioCompra() {
+        return precioCompra;
     }
 
-    public void setEstado(EstadoCoche estado) {
-        this.estado = estado;
+    public void setPrecioCompra(float precioCompra) {
+        this.precioCompra = precioCompra;
     }
 
-    public TipoCoche getTipo() {
-        return tipo;
+    public Exposicion getExposiciones() {
+        return exposicion;
     }
 
-    public void setTipo(TipoCoche tipo) {
-        this.tipo = tipo;
+    public void setExposiciones(Exposicion exposicion) {
+        this.exposicion = exposicion;
     }
 
-    public List<Reparacion> getReparaciones() {
+    public ArrayList<Reparacion> getReparaciones() {
         return reparaciones;
     }
 
-    public void addReparacion(Reparacion reparacion) {
-        reparaciones.add(reparacion);
+    public void setReparaciones(ArrayList<Reparacion> reparaciones) {
+        this.reparaciones = reparaciones;
     }
 
-    public void removeReparacion(Reparacion reparacion) {
-        reparaciones.remove(reparacion);
+    public void cambiarExposicion() {
     }
 
-    public void mostrarReparaciones() {
-        if (reparaciones.isEmpty()) {
-            System.out.println("No hay reparaciones para este coche.");
-        } else {
-            System.out.println("Reparaciones realizadas en el coche " + matricula + ":");
-            for (Reparacion reparacion : reparaciones) {
-                System.out.println("- " + reparacion.getTipo() + ", Fecha: " + reparacion.getFecha());
-            }
-        }
-    }
-
-    // Otros métodos relevantes para la gestión de coches
-
-    @Override
-    public String toString() {
-        return "Coche{" +
-                "marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", matricula='" + matricula + '\'' +
-                ", precioCompra=" + precioCompra +
-                ", precioVenta=" + precioVenta +
-                ", estado=" + estado +
-                ", tipo=" + tipo +
-                '}';
-    }
-
-    public static enum EstadoCoche {
-        REPARADO,
-        EN_VENTA,
-        RESERVADO,
-        VENDIDO
-    }
-
-    public static enum TipoCoche {
-        TURISMO,
-        INDUSTRIAL,
-        TODOTERRENO
-    }
 }

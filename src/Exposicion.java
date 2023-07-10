@@ -1,20 +1,38 @@
 public class Exposicion {
-    private int numeroExposicion;
+    private String tipo;
+    private int numExposicion;
+    private int telefono;
     private String direccion;
-    private String telefono;
 
-    public Exposicion(int numeroExposicion, String direccion, String telefono) {
-        this.numeroExposicion = numeroExposicion;
-        this.direccion = direccion;
+    public Exposicion(String tipo, int numExposicion, int telefono, String direccion) {
+        this.tipo = tipo;
+        this.numExposicion = numExposicion;
         this.telefono = telefono;
+        this.direccion = direccion;
     }
 
-    public int getNumeroExposicion() {
-        return numeroExposicion;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setNumeroExposicion(int numeroExposicion) {
-        this.numeroExposicion = numeroExposicion;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public int getNumExposicion() {
+        return numExposicion;
+    }
+
+    public void setNumExposicion(int numExposicion) {
+        this.numExposicion = numExposicion;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
     }
 
     public String getDireccion() {
@@ -25,11 +43,6 @@ public class Exposicion {
         this.direccion = direccion;
     }
 
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
+    public void añadirCoche(Coche coche){}
+    public void borrarCoche(Coche coche){}
 }

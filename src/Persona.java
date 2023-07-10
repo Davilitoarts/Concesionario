@@ -11,10 +11,6 @@ public class Persona {
         this.telefono = telefono;
     }
 
-    public Persona(String nombre, String direccion) {
-
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -23,7 +19,7 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public int getDireccion() {
+    public String getDireccion() {
         return direccion;
     }
 
