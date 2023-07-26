@@ -7,7 +7,9 @@ public class DirectorComercial extends Persona {
         super(nombre, apellido, direccion, DNI, telefono);
     }
 
-    public DirectorComercial() {
+    public DirectorComercial() throws InvalidException {
+        super();
+
     }
 
     public void imprimirDatosDirector(){

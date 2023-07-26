@@ -5,7 +5,7 @@ import Comprobaciones.String.ComprobarNombre;
 import Comprobaciones.Int.ComprobarTlf;
 import Excepciones.InvalidException;
 
-public class Persona {
+public abstract class Persona {
     private String nombre;
     private String apellido;
     private String direccion;
@@ -15,6 +15,7 @@ public class Persona {
     private ComprobarDireccion comprobarDireccion = new ComprobarDireccion();
     private ComprobarDNI comprobarDNI = new ComprobarDNI();
     private ComprobarTlf comprobarTlf = new ComprobarTlf();
+
 
 
     public Persona(String nombre, String apellido, String direccion, String DNI, int telefono) throws InvalidException {
@@ -34,7 +35,7 @@ public class Persona {
         this.telefono = telefono;
     }
 
-    public Persona() {
+    public Persona() throws InvalidException {
 
     }
 

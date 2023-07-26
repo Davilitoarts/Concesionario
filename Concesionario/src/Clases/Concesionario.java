@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 
 public class Concesionario {
     private HashMap<String, Cliente> clientes;
@@ -24,11 +23,11 @@ public class Concesionario {
         this.mecanicos = new HashMap<>();
         this.coches = new HashMap<>();
         this.ventas = new HashMap<>();
-        this.director = new DirectorComercial("Juan", "Álvarez", "C/Albaricoque", "12345678F", 666778899);
         exposiciones = new HashMap<>();
 
 
     }
+
     public HashMap<String, Cliente> getClientes() {
         return clientes;
     }
@@ -112,14 +111,16 @@ public class Concesionario {
     public void removeVendedor(String dni) {
         vendedores.remove(dni);
     }
-    public void agregarMecanico(Mecanico mecanico){
+
+    public void agregarMecanico(Mecanico mecanico) {
         mecanicos.put(mecanico.getDNI(), mecanico);
     }
+
     public void removeMecanico(String dni) {
         mecanicos.remove(dni);
     }
 
-    public void agregarCoche(Coche coche) { // dar de alta a un coche
+    public void agregarCoche(Coche coche) {
         coches.put(coche.getMatricula(), coche);
     }
 
@@ -127,36 +128,29 @@ public class Concesionario {
         coches.remove(matricula);
     }
 
-
-
-    public void agregarReserva (Coche coche){
+    public void agregarReserva(Coche coche) {
         reservas.put(coche.getMatricula(), coche);
     }
-    public void removeReserva(String matricula){
+
+    public void removeReserva(String matricula) {
         reservas.remove(matricula);
     }
-
-
-
 
     public void registrarVenta(String matriculaCoche, String nombreCliente) {
         ventas.put(matriculaCoche, nombreCliente);
     }
+    public void agregarExposicion(Exposicion exposicion) {
+        exposiciones.put(exposicion.getNumExposicion(), exposicion);
+    }
+
+    public void removeExposicion(int numExpo) {
+        exposiciones.remove(numExpo);
+    }
+
 
     public String queCliente(String cliente) {
         return ventas.get(cliente);
     }
-
-
-    public void llenar() throws InvalidException {
-        clientes.put("12345678A", new Cliente ("Pepe", "Vaca", 23, "C/CULO", "12345678A", 987654321));
-        coches.put("1234ABC", new Coche(TipoCoche.TURISMO, "Q", "Q", "Q", EstadoCoche.EN_VENTA, "1234ABC", 10000, 5000));
-        coches.put("1234AAA", new Coche(TipoCoche.TURISMO, "K", "K", "K", EstadoCoche.EN_VENTA, "1234AAA", 1000, 500));
-        vendedores.put("12345678B", new VendedorAComision("P","P", "P","12345678B", 123456789));
-        vendedores.put("12345678C", new VendedorAComision("L","L", "L","12345678C", 123456788));
-
-    }
-
 
     public void imprimirStock() {
         if (coches.isEmpty()) {
@@ -176,6 +170,7 @@ public class Concesionario {
             }
         }
     }
+
     public void imprimirCochesReservados() {
         try {
             System.out.println("*** COCHES RESERVADOS ***");
@@ -196,6 +191,7 @@ public class Concesionario {
             System.out.println(e.getMessage());
         }
     }
+
     public void imprimirClienteConReservas() {
         try {
             if (clientes.isEmpty()) {
@@ -222,18 +218,11 @@ public class Concesionario {
                     } else throw new InvalidException("Este cliente no tiene coches reservados");
                 }
             }
-        } catch (InvalidException e){
+        } catch (InvalidException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void agregarExposicion(Exposicion exposicion) {
-        exposiciones.put(exposicion.getNumExposicion(), exposicion);
-    }
-
-    public void removeExposicion(int numExpo) {
-        exposiciones.remove(numExpo);
-    }
 
     public void imprimirExposiciones() {
         if (exposiciones.isEmpty()) {
@@ -257,7 +246,8 @@ public class Concesionario {
             }
         }
     }
-    public void imprimirClientes(){
+
+    public void imprimirClientes() {
         if (clientes.isEmpty()) {
             System.out.println("No hay clientes disponibles");
         } else {
@@ -272,10 +262,12 @@ public class Concesionario {
             }
         }
     }
-    public void imprimirVendedores(){
+
+    public void imprimirVendedores() {
         if (vendedores.isEmpty()) {
             System.out.println("No hay vendedores disponibles");
-        } else {System.out.println("*** LISTA DE VENDEDORES ***");
+        } else {
+            System.out.println("*** LISTA DE VENDEDORES ***");
             for (VendedorAComision vendedor : vendedores.values()) {
                 System.out.println("Nombre: " + vendedor.getNombre());
                 System.out.println("DNI: " + vendedor.getDNI());
@@ -283,8 +275,9 @@ public class Concesionario {
             }
         }
     }
-    public List<VendedorAComision> listadoPorTotalVendido() {
-        List<VendedorAComision> sueldos = new ArrayList<>();
+
+    public ArrayList<VendedorAComision> listadoPorTotalVendido() {
+        ArrayList<VendedorAComision> sueldos = new ArrayList<>();
 
         if (vendedores.isEmpty()) {
             System.out.println("No existen vendedores en el concesionario");
@@ -304,14 +297,16 @@ public class Concesionario {
                 System.out.println("Teléfono: " + vendedor.getTelefono());
                 System.out.println("Ha vendido: " + vendedor.getNumeroVentas() + " unidades");
                 System.out.println("Cantidad total vendida en €: " + vendedor.getVolumenVentas());
-                System.out.println("El sueldo es de: " + vendedor.sueldoAComision());
+                System.out.println("La comisión es de: " + vendedor.sueldoAComision());
+                System.out.println("El sueldo es de: " + vendedor.getSueldo());
                 System.out.println("------------------------");
             }
         }
 
         return sueldos; // Devolver la lista ordenada de vendedores
     }
-    public void imprimirMecanicos(){
+
+    public void imprimirMecanicos() {
         if (mecanicos.isEmpty()) {
             System.out.println("No hay mecánicos disponibles");
         } else {
@@ -334,6 +329,15 @@ public class Concesionario {
                 coche.imprimirReparaciones();
             }
         }
+    }
+    public boolean validarDni(String dni) {
+        if(vendedores.containsKey(dni) || clientes.containsKey(dni) || mecanicos.containsKey(dni) || director.getDNI().equals(dni)) return false;
+        else return true;
+
+    }
+    public boolean validarMatricula(String matricula) {
+        if(coches.containsKey(matricula)) return false;
+        else return true;
     }
 }
 
