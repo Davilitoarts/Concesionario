@@ -32,18 +32,42 @@ public class ScannerReservas {
             System.out.print("Introduce la matrícula del coche a reservar: ");
             String matricula = reserva.nextLine();
             comprobarMatricula.comprobacion(matricula);
+
+            HashMap<Integer, Exposicion> exposiciones = concesionario.getExposiciones();
+            for (Exposicion exposicion : exposiciones.values()) {
+                ArrayList<Coche> cochesExpo = exposicion.getCoches();
+                for (Coche coche : cochesExpo) {
+                    if (coche.getMatricula().equals(matricula)) {
+                        if (coche.getEstado() == EstadoCoche.EN_EXPOSICION) {
+                            System.out.print("Introduce el dni del cliente:");
+                            reserva.nextLine();
+                            String dni = reserva.nextLine();
+                            comprobarDNI.comprobacion(dni);
+                            if (clientes.containsKey(dni)) {
+                                Cliente cliente = clientes.get(dni);
+                                coche.setEstado(EstadoCoche.RESERVADO);
+                                cliente.agregarCocheReservado(coche);
+                                System.out.println("El coche " + coche.getMarca() + " " + coche.getModelo() + " con matrícula " + coche.getMatricula() + " ha sido reservado por el cliente: " + cliente.getNombre() + " " + cliente.getApellido());
+                            } else throw new NotFoundException("El cliente no está dado de alta");
+                        } else throw new InvalidException("El coche ya ha sido reservado por otro cliente");
+                    }
+                    break;
+                }
+            }
+
             if (coches.containsKey(matricula)) {
                 Coche coche = coches.get(matricula);
-                System.out.print("Introduce el dni del cliente:");
-                String dni = reserva.nextLine();
-                comprobarDNI.comprobacion(dni);
-                if (clientes.containsKey(dni)) {
-                    Cliente cliente = clientes.get(dni);
-                    coche.setEstado(EstadoCoche.RESERVADO);
-                    cliente.agregarCocheReservado(coche);
-                    concesionario.removeCoche(matricula);
-                    System.out.println("El coche " + coche.getMarca() + " " + coche.getModelo() + " con matrícula " + coche.getMatricula() + " ha sido reservado por el cliente: " + cliente.getNombre());
-                } else throw new NotFoundException("El cliente no está dado de alta");
+                if (coche.getEstado().equals(EstadoCoche.EN_VENTA)) {
+                    System.out.print("Introduce el dni del cliente:");
+                    String dni = reserva.nextLine();
+                    comprobarDNI.comprobacion(dni);
+                    if (clientes.containsKey(dni)) {
+                        Cliente cliente = clientes.get(dni);
+                        coche.setEstado(EstadoCoche.RESERVADO);
+                        cliente.agregarCocheReservado(coche);
+                        System.out.println("El coche " + coche.getMarca() + " " + coche.getModelo() + " con matrícula " + coche.getMatricula() + " ha sido reservado por el cliente: " + cliente.getNombre() + " " + cliente.getApellido());
+                    } else throw new NotFoundException("El cliente no está dado de alta");
+                } else throw new InvalidException("El coche ya ha sido reservado por otro cliente");
             } else throw new NotFoundException("El coche no está disponible en el stock del concesionario.");
         } catch (NotFoundException | InvalidException e) {
             System.out.println(e.getMessage());
@@ -98,10 +122,11 @@ public class ScannerReservas {
                 throw new InvalidException("Debe elegir entre una de las opciones disponibles");
             if (opcion == 1) reservarCoche();
             if (opcion == 2) cancelarReserva();
-            if (opcion == 3)  menu(concesionario);
+            if (opcion == 3) menu(concesionario);
         } catch (InvalidException e) {
             System.out.println(e.getMessage());
             menu(concesionario);
         }
     }
 }
+

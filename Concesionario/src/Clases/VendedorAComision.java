@@ -19,7 +19,7 @@ public class VendedorAComision extends Persona {
         return cochesVendidos;
     }
 
-    public int getSueldo() {
+    public int getSueldo() throws InvalidException {
         return (int) getVolumenVentas() + sueldoAComision();
     }
 
@@ -45,7 +45,7 @@ public class VendedorAComision extends Persona {
         System.out.println("Teléfono: " + getTelefono());
         System.out.println("------------------------");
     }
-    public void imprimirCochesVendidos(){
+    public void imprimirCochesVendidos() throws InvalidException {
         if(!cochesVendidos.isEmpty()){
             System.out.println("Coches vendidos: ");
             for (Coche coche : cochesVendidos){

@@ -73,10 +73,13 @@ public class ScannerVendedor {
             System.out.print("Introduce el DNI del vendedor a dar de baja: ");
             String dni = scanner.nextLine();
             comprobarDNI.comprobacion(dni);
-            HashMap<String, VendedorAComision> vendedor = concesionario.getVendedores();
-            if (vendedor.containsKey(dni)) {
+            HashMap<String, VendedorAComision> vendedores = concesionario.getVendedores();
+            if (vendedores.containsKey(dni)) {
+                VendedorAComision vendedor = vendedores.get(dni);
+                if(vendedor.getCochesVendidos().isEmpty()){
                 concesionario.removeVendedor(dni);
                 System.out.println("El vendedor ha sido eliminado correctamente");
+                } else throw new InvalidException("No se puede dar de baja a un vendedor que ha realizado ventas");
             } else throw new NotFoundException("El vendedor no está dado de alta");
         } catch (NotFoundException | InvalidException e) {
             System.out.println(e.getMessage());

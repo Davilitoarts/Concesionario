@@ -116,7 +116,10 @@ public class ScannerMecanico {
             comprobarDNI.comprobacion(dni);
             HashMap<String, Mecanico> mecanicos = concesionario.getMecanicos();
             if (mecanicos.containsKey(dni)) {
+                Mecanico mecanico = mecanicos.get(dni);
+                if(mecanico.getCochesReparados().isEmpty()){
                 concesionario.removeMecanico(dni);
+                } else throw new InvalidException("No se puede dar de baja a un mecánico que ha reparado coches");
             } else throw new NotFoundException("El mecánico no está dado de alta");
         } catch (NotFoundException | InvalidException e) {
             System.out.println(e.getMessage());
@@ -134,26 +137,27 @@ public class ScannerMecanico {
                 Mecanico mecanico = mecanicos.get(dni);
                 System.out.print("Introduce la matrícula del coche a reparar:");
                 String matricula = reparar.nextLine();
-                if (coches.containsKey(matricula)) {
-                    Coche coche = coches.get(matricula);
-                    ArrayList<Reparacion> reparaciones = coche.getReparaciones();
-                    if (!reparaciones.isEmpty()) {
+                    if (coches.containsKey(matricula)) {
+                        Coche coche = coches.get(matricula);
+                        ArrayList<Reparacion> reparaciones = coche.getReparaciones();
+                        if (!reparaciones.isEmpty()) {
 
-                        for (Reparacion reparacion : reparaciones) {
-                            reparacion.setResuelta(true);
+                            for (Reparacion reparacion : reparaciones) {
+                                reparacion.setResuelta(true);
 
-                        }
-                        mecanico.agregarCochesReparados(coche);
-                        coche.setEstado(EstadoCoche.EN_VENTA);
-                        System.out.println("Todas las reparaciones han sido corregidas");
-                    } else throw new InvalidException("El coche no tiene reparaciones");
-                } else throw new NotFoundException("El coche no se encuentra en el stock del concesionario");
-            } else throw new NotFoundException("El mecánico escogido no está dado de alta");
-        } catch (InvalidException | NotFoundException e) {
-            System.out.println(e.getMessage());
-            menu(concesionario);
+                            }
+                            mecanico.agregarCochesReparados(coche);
+                            coche.setEstado(EstadoCoche.EN_VENTA);
+                            System.out.println("Todas las reparaciones han sido corregidas");
+                        } else throw new InvalidException("El coche no tiene reparaciones");
+                    } else throw new NotFoundException("El coche no se encuentra en el stock del concesionario");
+            }else throw new NotFoundException("El mecánico escogido no está dado de alta");
+        }catch(InvalidException | NotFoundException e){
+                System.out.println(e.getMessage());
+                menu(concesionario);
+            }
         }
-    }
+
 
     public void consolaMecanico() {
         try {

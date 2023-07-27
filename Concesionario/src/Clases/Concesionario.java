@@ -152,7 +152,7 @@ public class Concesionario {
         return ventas.get(cliente);
     }
 
-    public void imprimirStock() {
+    public void imprimirStock() throws InvalidException {
         if (coches.isEmpty()) {
             System.out.println("No hay coches en stock");
         } else {
@@ -276,7 +276,7 @@ public class Concesionario {
         }
     }
 
-    public ArrayList<VendedorAComision> listadoPorTotalVendido() {
+    public void listadoPorTotalVendido() throws InvalidException {
         ArrayList<VendedorAComision> sueldos = new ArrayList<>();
 
         if (vendedores.isEmpty()) {
@@ -287,7 +287,7 @@ public class Concesionario {
                 sueldos.add(vendedor);
             }
 
-            // Ordenar la lista de vendedores por volumen total de ventas realizadas (de mayor a menor)
+
             Collections.sort(sueldos, Comparator.comparing(VendedorAComision::getVolumenVentas).reversed());
 
             for (VendedorAComision vendedor : sueldos) {
@@ -303,7 +303,6 @@ public class Concesionario {
             }
         }
 
-        return sueldos; // Devolver la lista ordenada de vendedores
     }
 
     public void imprimirMecanicos() {

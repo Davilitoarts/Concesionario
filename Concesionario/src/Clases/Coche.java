@@ -72,7 +72,8 @@ public class Coche {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(String color) throws InvalidException {
+        comprobarColor.comprobacion(color);
         this.color = color;
     }
 
@@ -93,6 +94,7 @@ public class Coche {
     }
 
     public float getPrecioVenta() {
+
         return precioVenta;
     }
 
@@ -123,7 +125,7 @@ public class Coche {
 
     public void agregarCochesReparados(Reparacion reparacion) {
         if (reparacion.isResuelta()) {
-            reparaciones.add(reparacion); // Agregamos la reparación a la lista de reparaciones reparadas
+            reparaciones.add(reparacion);
         }
     }
 
@@ -132,7 +134,7 @@ public class Coche {
         System.out.println("Reparaciones del coche: " + matricula);
         for (Reparacion reparacion : reparaciones) {
             System.out.println("Tipo de reparación: " + reparacion.getTipo());
-            if(reparacion.isResuelta() == true) System.out.println("Estado: resuelta");
+            if(reparacion.isResuelta()) System.out.println("Estado: resuelta");
             else System.out.println("Estado: no resuelta");
             System.out.println("Fecha: " + reparacion.getFecha());
             System.out.println("--------------------------");

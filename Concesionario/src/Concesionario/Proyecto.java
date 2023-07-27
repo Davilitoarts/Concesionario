@@ -32,7 +32,8 @@ public class Proyecto {
                 System.out.println("5- SALIR");
                 System.out.print("Elija una de estas opciones: ");
                 num = consola.nextInt();
-                if (num == 1) {clientes.consolaClientes();
+                if (num == 1) {
+                    clientes.consolaClientes();
                 } else if (num == 2) {
                     vendedores.consolaVendedor();
                 } else if (num == 3) {

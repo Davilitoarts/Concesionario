@@ -67,7 +67,7 @@ public class ScannerExpo {
             comprobarNumExpo.comprobacion(numExpo);
             if (exposiciones.containsKey(numExpo)) {
                 Exposicion exposicion = exposiciones.get(numExpo);
-                if (exposicion.getCoches().size() == 0) {
+                if (exposicion.getCoches().isEmpty()) {
                     exposiciones.remove(numExpo, exposicion);
                     System.out.println("La exposición ha sido eliminada correctamente");
                 } else throw new InvalidException("No se puede eliminar porque esta exposición tiene coches");
